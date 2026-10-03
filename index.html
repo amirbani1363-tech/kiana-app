@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0A1F44">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>کیانا | حسابداری پیمانکاری</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1F44;
+  --navy-2:#1E3A8A;
+  --gold:#D4AF37;
+  --gold-light:#F4D03F;
+  --pearl:#F8F9FB;
+  --ink:#1A1A2E;
+  --glass:rgba(255,255,255,.08);
+  --glass-strong:rgba(255,255,255,.15);
+  --border:rgba(255,255,255,.18);
+  --shadow:0 8px 32px rgba(10,31,68,.18);
+  --radius:20px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Vazirmatn',system-ui,sans-serif;
+  background:linear-gradient(160deg,#0A1F44 0%,#1E3A8A 55%,#0A1F44 100%);
+  background-attachment:fixed;
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+  padding-bottom:96px;
+  direction:rtl;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(212,175,55,.18),transparent 40%),
+    radial-gradient(circle at 90% 80%,rgba(30,58,138,.35),transparent 45%);
+  z-index:0;
+}
+.app{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:20px 16px}
+
+/* ========== Header ========== */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:48px;height:48px;border-radius:14px;
+  background:linear-gradient(135deg,#D4AF37,#F4D03F);
+  display:grid;place-items:center;font-weight:800;font-size:22px;color:#0A1F44;
+  box-shadow:0 6px 22px rgba(212,175,55,.45);
+}
+.brand h1{font-size:20px;font-weight:800;letter-spacing:.3px}
+.brand p{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
+.user-chip{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--border);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  font-size:12px;font-weight:600;
+}
+.user-chip .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e}
+
+/* ========== Cards ========== */
+.card{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  padding:20px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 45%);
+  pointer-events:none;
+}
+
+/* Hero balance card */
+.hero{
+  background:linear-gradient(135deg,rgba(212,175,55,.22),rgba(30,58,138,.35));
+  border:1px solid rgba(212,175,55,.4);
+  border-radius:24px;padding:24px;margin-bottom:16px;
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  box-shadow:0 20px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-50%;left:-20%;width:180%;height:180%;
+  background:conic-gradient(from 0deg,transparent,rgba(244,208,63,.15),transparent 30%);
+  animation:shine 8s linear infinite;
+}
+@keyframes shine{to{transform:rotate(360deg)}}
+.hero-label{font-size:12px;color:rgba(255,255,255,.7);display:flex;justify-content:space-between;align-items:center}
+.hero-label .badge{background:rgba(34,197,94,.2);color:#4ade80;padding:3px 10px;border-radius:50px;font-size:10px;font-weight:700}
+.hero-amount{font-size:34px;font-weight:800;margin:10px 0 4px;letter-spacing:-.5px;position:relative;z-index:1}
+.hero-amount small{font-size:14px;font-weight:500;color:rgba(255,255,255,.6);margin-right:6px}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.65);position:relative;z-index:1}
+
+/* Stats grid */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.stat{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:18px;padding:16px;backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+}
+.stat::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;border-radius:50%;opacity:.15;filter:blur(20px)}
+.stat.income::before{background:#22c55e}
+.stat.expense::before{background:#ef4444}
+.stat .label{font-size:11px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:6px}
+.stat .ico{width:22px;height:22px;border-radius:8px;display:grid;place-items:center;font-size:12px}
+.income .ico{background:rgba(34,197,94,.2);color:#4ade80}
+.expense .ico{background:rgba(239,68,68,.2);color:#f87171}
+.stat .val{font-size:18px;font-weight:800;margin-top:8px}
+.stat .val small{font-size:10px;color:rgba(255,255,255,.5);font-weight:400}
+
+/* Section title */
+.sec-title{display:flex;align-items:center;justify-content:space-between;margin:22px 4px 12px}
+.sec-title h2{font-size:15px;font-weight:700}
+.sec-title a{font-size:11px;color:var(--gold);text-decoration:none;font-weight:600}
+
+/* Quick actions */
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px}
+.qbtn{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:16px;padding:14px 6px;text-align:center;cursor:pointer;
+  transition:.25s;backdrop-filter:blur(20px);
+}
+.qbtn:active{transform:scale(.94);background:var(--glass-strong)}
+.qbtn .qi{font-size:20px;display:block;margin-bottom:6px}
+.qbtn span{font-size:10px;font-weight:600;color:rgba(255,255,255,.85)}
+
+/* Transaction list */
+.tx-list{display:flex;flex-direction:column;gap:10px}
+.tx{
+  display:flex;align-items:center;gap:12px;
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:16px;padding:14px;backdrop-filter:blur(20px);
+  transition:.2s;
+}
+.tx:active{transform:scale(.98)}
+.tx-ico{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  font-size:18px;flex-shrink:0;
+}
+.tx-ico.in{background:linear-gradient(135deg,rgba(34,197,94,.25),rgba(34,197,94,.1));color:#4ade80}
+.tx-ico.out{background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(239,68,68,.1));color:#f87171}
+.tx-info{flex:1;min-width:0}
+.tx-info .t{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-info .d{font-size:10px;color:rgba(255,255,255,.5);margin-top:3px}
+.tx-amt{font-size:13px;font-weight:700;white-space:nowrap}
+.tx-amt.in{color:#4ade80}
+.tx-amt.out{color:#f87171}
+
+/* Empty */
+.empty{text-align:center;padding:30px 10px;color:rgba(255,255,255,.5);font-size:12px}
+.empty .ei{font-size:36px;margin-bottom:10px;opacity:.5}
+
+/* Progress bars for projects */
+.proj{margin-bottom:14px}
+.proj-head{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px}
+.proj-head b{font-weight:700}
+.proj-head span{color:var(--gold);font-weight:600}
+.bar{height:8px;background:rgba(255,255,255,.08);border-radius:50px;overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:50px;background:linear-gradient(90deg,#D4AF37,#F4D03F);box-shadow:0 0 12px rgba(212,175,55,.6)}
+
+/* Bottom Navigation */
+.nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(10,31,68,.85);
+  backdrop-filter:blur(30px) saturate(180%);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-around;
+  padding:10px 8px calc(10px + env(safe-area-inset-bottom));
+  max-width:520px;margin:0 auto;
+}
+.nav-item{
+  flex:1;text-align:center;padding:6px;border-radius:14px;
+  cursor:pointer;transition:.2s;color:rgba(255,255,255,.5);
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+}
+.nav-item.active{color:var(--gold)}
+.nav-item.active .ni{background:linear-gradient(135deg,rgba(212,175,55,.25),rgba(244,208,63,.1));color:var(--gold)}
+.ni{
+  width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  font-size:18px;transition:.2s;
+}
+.nav-item span{font-size:10px;font-weight:600}
+
+/* Modal */
+.modal{
+  position:fixed;inset:0;z-index:200;display:none;
+  background:rgba(5,15,35,.7);backdrop-filter:blur(8px);
+  align-items:flex-end;justify-content:center;
+}
+.modal.show{display:flex;animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.sheet{
+  width:100%;max-width:520px;
+  background:linear-gradient(160deg,#0F2851,#0A1F44);
+  border-top:1px solid var(--border);
+  border-radius:28px 28px 0 0;
+  padding:20px 20px calc(28px + env(safe-area-inset-bottom));
+  animation:slideUp .3s cubic-bezier(.2,.9,.3,1);
+  max-height:90vh;overflow-y:auto;
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.sheet-head h3{font-size:16px;font-weight:700}
+.sheet-head button{background:var(--glass);border:1px solid var(--border);color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px}
+
+/* Form */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:7px;font-weight:500}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 14px;border-radius:14px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+  color:#fff;font-family:inherit;font-size:13px;
+  outline:none;transition:.2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--gold);background:rgba(255,255,255,.1);
+  box-shadow:0 0 0 3px rgba(212,175,55,.15);
+}
+.field select option{background:#0A1F44;color:#fff}
+.seg{display:flex;gap:8px;background:rgba(255,255,255,.05);padding:5px;border-radius:14px}
+.seg button{
+  flex:1;padding:10px;border:none;border-radius:10px;
+  background:transparent;color:rgba(255,255,255,.6);
+  font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;
+}
+.seg button.active{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0A1F44}
+.btn-primary{
+  width:100%;padding:15px;border:none;border-radius:16px;
+  background:linear-gradient(135deg,#D4AF37,#F4D03F);
+  color:#0A1F44;font-weight:800;font-size:14px;font-family:inherit;
+  cursor:pointer;box-shadow:0 10px 30px rgba(212,175,55,.35);
+  transition:.2s;margin-top:8px;
+}
+.btn-primary:active{transform:scale(.98)}
+.btn-danger{
+  width:100%;padding:13px;border:1px solid rgba(239,68,68,.4);
+  border-radius:14px;background:rgba(239,68,68,.12);
+  color:#f87171;font-weight:700;font-size:13px;font-family:inherit;
+  cursor:pointer;margin-top:10px;
+}
+
+/* Pages */
+.page{display:none;animation:fadeIn .3s}
+.page.active{display:block}
+
+/* Install banner */
+.install{
+  display:none;
+  background:linear-gradient(135deg,rgba(212,175,55,.2),rgba(244,208,63,.1));
+  border:1px solid rgba(212,175,55,.4);
+  border-radius:16px;padding:14px;margin-bottom:16px;
+  align-items:center;gap:12px;
+}
+.install.show{display:flex}
+.install .ib{flex:1;font-size:12px;line-height:1.6}
+.install .ib b{color:var(--gold);display:block;margin-bottom:2px;font-size:13px}
+.install button{
+  padding:9px 16px;border:none;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:#0A1F44;font-weight:700;font-size:11px;font-family:inherit;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Install Banner -->
+  <div class="install" id="installBanner">
+    <div class="ib"><b>📲 نصب کیانا</b>برای دسترسی سریع اپ را نصب کنید</div>
+    <button onclick="installApp()">نصب</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <div class="logo">ک</div>
+      <div><h1>کیانا</h1><p>حسابداری پیمانکاری</p></div>
+    </div>
+    <div class="user-chip"><span class="dot"></span><span id="today"></span></div>
+  </div>
+
+  <!-- ============ PAGE: HOME ============ -->
+  <div class="page active" id="page-home">
+
+    <div class="hero">
+      <div class="hero-label">
+        <span>موجودی کل</span>
+        <span class="badge">فعال</span>
+      </div>
+      <div class="hero-amount" id="balance">۰ <small>تومان</small></div>
+      <div class="hero-sub" id="heroSub">خوش آمدید 👋</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat income">
+        <div class="label"><span class="ico">↑</span>درآمد کل</div>
+        <div class="val" id="totalIncome">۰ <small>ت</small></div>
+      </div>
+      <div class="stat expense">
+        <div class="label"><span class="ico">↓</span>هزینه کل</div>
+        <div class="val" id="totalExpense">۰ <small>ت</small></div>
+      </div>
+    </div>
+
+    <div class="sec-title"><h2>دسترسی سریع</h2></div>
+    <div class="quick">
+      <div class="qbtn" onclick="openAdd('income')"><span class="qi">💰</span><span>درآمد</span></div>
+      <div class="qbtn" onclick="openAdd('expense')"><span class="qi">🧾</span><span>هزینه</span></div>
+      <div class="qbtn" onclick="openAdd('rent')"><span class="qi">🏠</span><span>اجاره</span></div>
+      <div class="qbtn" onclick="openAdd('invoice')"><span class="qi">📄</span><span>فاکتور</span></div>
+    </div>
+
+    <div class="sec-title">
+      <h2>آخرین تراکنش‌ها</h2>
+      <a onclick="go('reports')">مشاهده همه</a>
+    </div>
+    <div class="tx-list" id="recentList"></div>
+  </div>
+
+  <!-- ============ PAGE: PROJECTS ============ -->
+  <div class="page" id="page-projects">
+    <div class="sec-title"><h2>پروژه‌های فعال</h2></div>
+    <div class="card" id="projectsCard"></div>
+    <div class="sec-title"><h2>افزودن پروژه</h2></div>
+    <div class="card">
+      <div class="field"><label>نام پروژه</label><input id="pName" placeholder="مثلاً: برج آسمان"></div>
+      <div class="field"><label>بودجه (تومان)</label><input id="pBudget" type="number" placeholder="500000000"></div>
+      <div class="field"><label>پیشرفت (٪)</label><input id="pProgress" type="number" min="0" max="100" placeholder="0"></div>
+      <button class="btn-primary" onclick="addProject()">➕ افزودن پروژه</button>
+    </div>
+  </div>
+
+  <!-- ============ PAGE: REPORTS ============ -->
+  <div class="page" id="page-reports">
+    <div class="sec-title"><h2>گزارش مالی</h2></div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+        <span>درآمد</span><span id="rIncome" style="color:#4ade80;font-weight:700">۰</span>
+      </div>
+      <div class="bar" style="margin-bottom:14px"><i id="barIncome" style="width:0%"></i></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+        <span>هزینه</span><span id="rExpense" style="color:#f87171;font-weight:700">۰</span>
+      </div>
+      <div class="bar" style="margin-bottom:14px"><i id="barExpense" style="width:0%;background:linear-gradient(90deg,#ef4444,#f87171)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)">
+        <b>سود خالص</b><b id="rProfit" style="color:var(--gold)">۰</b>
+      </div>
+    </div>
+
+    <div class="sec-title"><h2>همه تراکنش‌ها</h2></div>
+    <div class="tx-list" id="allList"></div>
+  </div>
+
+  <!-- ============ PAGE: SETTINGS ============ -->
+  <div class="page" id="page-settings">
+    <div class="sec-title"><h2>تنظیمات</h2></div>
+    <div class="card">
+      <div class="field"><label>نام پیمانکار</label><input id="sName" placeholder="نام شما"></div>
+      <div class="field"><label>نام شرکت</label><input id="sCompany" placeholder="شرکت ساختمانی"></div>
+      <button class="btn-primary" onclick="saveSettings()">💾 ذخیره</button>
+    </div>
+
+    <div class="sec-title"><h2>درباره اپ</h2></div>
+    <div class="card" style="font-size:12px;line-height:1.9;color:rgba(255,255,255,.75)">
+      <b style="color:var(--gold)">کیانا نسخه ۱.۰</b><br>
+      اپلیکیشن حسابداری پیمانکاری<br>
+      تمام داده‌ها به‌صورت محلی روی دستگاه شما ذخیره می‌شوند و امن هستند.
+      <button class="btn-danger" onclick="clearAll()">🗑 پاک کردن همه داده‌ها</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="modal" id="modal">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3 id="mTitle">تراکنش جدید</h3>
+      <button onclick="closeModal()">✕</button>
+    </div>
+
+    <div class="seg" id="mSeg" style="margin-bottom:16px">
+      <button data-type="income" onclick="setType('income')">درآمد</button>
+      <button data-type="expense" onclick="setType('expense')">هزینه</button>
+      <button data-type="rent" onclick="setType('rent')">اجاره</button>
+      <button data-type="invoice" onclick="setType('invoice')">فاکتور</button>
+    </div>
+
+    <div class="field"><label>عنوان</label><input id="mTitleInput" placeholder="مثلاً: خرید سیمان"></div>
+    <div class="field"><label>مبلغ (تومان)</label><input id="mAmount" type="number" placeholder="1000000"></div>
+    <div class="field"><label>پروژه</label>
+      <select id="mProject"><option value="">— انتخاب پروژه —</option></select>
+    </div>
+    <div class="field"><label>توضیحات (اختیاری)</label><textarea id="mDesc" rows="2" placeholder="..."></textarea></div>
+
+    <button class="btn-primary" onclick="saveTx()">✔ ثبت</button>
+  </div>
+</div>
+
+<!-- ============ BOTTOM NAV ============ -->
+<div class="nav">
+  <div class="nav-item active" data-page="home" onclick="go('home')"><div class="ni">🏠</div><span>خانه</span></div>
+  <div class="nav-item" data-page="projects" onclick="go('projects')"><div class="ni">🏗</div><span>پروژه‌ها</span></div>
+  <div class="nav-item" data-page="reports" onclick="go('reports')"><div class="ni">📊</div><span>گزارش</span></div>
+  <div class="nav-item" data-page="settings" onclick="go('settings')"><div class="ni">⚙️</div><span>تنظیمات</span></div>
+</div>
+
+<script>
+/* ============ State ============ */
+const LS_KEY='kiana_data_v1';
+let state = JSON.parse(localStorage.getItem(LS_KEY) || 'null') || {
+  txs:[], projects:[], settings:{name:'',company:''}
+};
+let currentType='income';
+let deferredPrompt=null;
+
+/* ============ Helpers ============ */
+const $ = s=>document.querySelector(s);
+const fa = n=>Math.round(n).toLocaleString('fa-IR');
+function save(){localStorage.setItem(LS_KEY,JSON.stringify(state))}
+
+function go(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  $('#page-'+page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===page));
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderAll();
+}
+
+/* ============ Modal ============ */
+function openAdd(type){
+  currentType=type;
+  setType(type);
+  $('#mTitleInput').value='';
+  $('#mAmount').value='';
+  $('#mDesc').value='';
+  refreshProjectSelect();
+  $('#modal').classList.add('show');
+}
+function closeModal(){$('#modal').classList.remove('show')}
+function setType(t){
+  currentType=t;
+  document.querySelectorAll('#mSeg button').forEach(b=>b.classList.toggle('active',b.dataset.type===t));
+  const titles={income:'ثبت درآمد',expense:'ثبت هزینه',rent:'ثبت اجاره',invoice:'ثبت فاکتور'};
+  $('#mTitle').textContent = titles[t]||'تراکنش جدید';
+}
+function refreshProjectSelect(){
+  const sel=$('#mProject');
+  sel.innerHTML='<option value="">— انتخاب پروژه —</option>';
+  state.projects.forEach(p=>{
+    const o=document.createElement('option');o.value=p.name;o.textContent=p.name;sel.appendChild(o);
+  });
+}
+
+/* ============ Transactions ============ */
+function saveTx(){
+  const title=$('#mTitleInput').value.trim();
+  const amount=Number($('#mAmount').value);
+  if(!title){alert('عنوان را وارد کنید');return}
+  if(!amount||amount<=0){alert('مبلغ معتبر وارد کنید');return}
+
+  state.txs.unshift({
+    id:Date.now(),
+    type:currentType,
+    title, amount,
+    project:$('#mProject').value,
+    desc:$('#mDesc').value.trim(),
+    date:new Date().toISOString()
+  });
+  save();closeModal();renderAll();
+}
+
+/* ============ Projects ============ */
+function addProject(){
+  const name=$('#pName').value.trim();
+  const budget=Number($('#pBudget').value)||0;
+  const progress=Math.min(100,Math.max(0,Number($('#pProgress').value)||0));
+  if(!name){alert('نام پروژه را وارد کنید');return}
+  state.projects.push({id:Date.now(),name,budget,progress});
+  save();
+  $('#pName').value='';$('#pBudget').value='';$('#pProgress').value='';
+  renderAll();
+}
+
+/* ============ Settings ============ */
+function saveSettings(){
+  state.settings.name=$('#sName').value.trim();
+  state.settings.company=$('#sCompany').value.trim();
+  save();alert('✅ ذخیره شد');
+}
+function clearAll(){
+  if(confirm('همه داده‌ها پاک شود؟')){
+    localStorage.removeItem(LS_KEY);
+    location.reload();
+  }
+}
+
+/* ============ Render ============ */
+function renderAll(){
+  const incomes = state.txs.filter(t=>t.type==='income'||t.type==='invoice').reduce((s,t)=>s+t.amount,0);
+  const expenses = state.txs.filter(t=>t.type==='expense'||t.type==='rent').reduce((s,t)=>s+t.amount,0);
+  const balance = incomes - expenses;
+
+  $('#balance').innerHTML = fa(balance)+' <small>تومان</small>';
+  $('#totalIncome').innerHTML = fa(incomes)+' <small>ت</small>';
+  $('#totalExpense').innerHTML = fa(expenses)+' <small>ت</small>';
+
+  const nm = state.settings.name || 'پیمانکار عزیز';
+  $('#heroSub').textContent = `سلام ${nm} 👋 ${state.projects.length} پروژه فعال`;
+
+  // recent list
+  const recent=$('#recentList');
+  if(!state.txs.length){
+    recent.innerHTML=`<div class="empty"><div class="ei">📭</div>هنوز تراکنشی ثبت نشده</div>`;
+  } else {
+    recent.innerHTML = state.txs.slice(0,4).map(txHTML).join('');
+  }
+
+  // all list
+  const all=$('#allList');
+  if(!state.txs.length){
+    all.innerHTML=`<div class="empty"><div class="ei">📊</div>گزارشی موجود نیست</div>`;
+  } else {
+    all.innerHTML = state.txs.map(txHTML).join('');
+  }
+
+  // stats bars
+  const max = Math.max(incomes,expenses,1);
+  $('#rIncome').textContent = fa(incomes)+' ت';
+  $('#rExpense').textContent = fa(expenses)+' ت';
+  $('#barIncome').style.width = (incomes/max*100)+'%';
+  $('#barExpense').style.width = (expenses/max*100)+'%';
+  $('#rProfit').textContent = fa(balance)+' ت';
+
+  // projects
+  const pc=$('#projectsCard');
+  if(!state.projects.length){
+    pc.innerHTML=`<div class="empty"><div class="ei">🏗</div>هنوز پروژه‌ای اضافه نشده</div>`;
+  } else {
+    pc.innerHTML = state.projects.map(p=>`
+      <div class="proj">
+        <div class="proj-head">
+          <b>${escapeHTML(p.name)}</b>
+          <span>${p.progress}٪</span>
+        </div>
+        <div class="bar"><i style="width:${p.progress}%"></i></div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:6px">
+          بودجه: ${fa(p.budget)} تومان
+        </div>
+      </div>`).join('');
+  }
+
+  // settings inputs
+  $('#sName').value = state.settings.name||'';
+  $('#sCompany').value = state.settings.company||'';
+
+  // date
+  $('#today').textContent = new Date().toLocaleDateString('fa-IR',{day:'numeric',month:'short'});
+}
+
+function txHTML(t){
+  const isIn = t.type==='income'||t.type==='invoice';
+  const icons = {income:'💰',expense:'🧾',rent:'🏠',invoice:'📄'};
+  const labels = {income:'درآمد',expense:'هزینه',rent:'اجاره',invoice:'فاکتور'};
+  const d = new Date(t.date).toLocaleDateString('fa-IR',{day:'numeric',month:'short'});
+  return `<div class="tx">
+    <div class="tx-ico ${isIn?'in':'out'}">${icons[t.type]}</div>
+    <div class="tx-info">
+      <div class="t">${escapeHTML(t.title)}</div>
+      <div class="d">${labels[t.type]}${t.project?' • '+escapeHTML(t.project):''} • ${d}</div>
+    </div>
+    <div class="tx-amt ${isIn?'in':'out'}">${isIn?'+':'−'} ${fa(t.amount)}</div>
+  </div>`;
+}
+
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+/* ============ PWA ============ */
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  $('#installBanner').classList.add('show');
+});
+function installApp(){
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(c=>{
+    if(c.outcome==='accepted') $('#installBanner').classList.remove('show');
+    deferredPrompt=null;
+  });
+}
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+
+/* ============ Init ============ */
+renderAll();
+</script>
+</body>
+</html>
